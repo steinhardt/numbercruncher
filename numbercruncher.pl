@@ -23,11 +23,17 @@ sub check_forbiddencharacters {
 
 
 # [3] Checks that only PSDs are in the `vrij/` directory but anything can be in `nietvrij/`
-print "FIXME - haven't coded this bit yet!\n";
-
+print "Checking that only PSDs reside in the vrij/ directory...\n";
+find(\&check_psdsinvrij, $dir);
+sub check_psdsinvrij {
+	if ( $_ !~ /vrij\/\d{2}\/\d{4}\/\d{6}-[A-Za-z0-9\.\-\+]?+\.psd$/ ) {
+		print "$scriptname - file $File::Find::name not in Photoshop format. Only Photoshop files (*.psd) allowed in vrij/ directories.\n";
+	}
+}
 
 exit;
 
 
 # TODO Print warnings to STDERR rather than STDOUT!
 # TODO Make directory selection interactive: e.g. "Enter the path of the directory you would like to check: ".
+# TODO Skip step 3 if $dir doesn't end in "vrij/" or "vrij".
