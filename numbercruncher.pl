@@ -13,6 +13,7 @@ print "FIXME - haven't coded this bit yet!\n";
 
 
 # [2] Checks that said file name also doesn’t contain spaces or "forbidden characters"
+print "Checking file names for forbidden characters...\n";
 find(\&check_forbiddencharacters, $dir);
 sub check_forbiddencharacters {
 	if ( $_ !~ /^[A-Za-z0-9\.\-\+]+$/ ) {
@@ -25,8 +26,8 @@ sub check_forbiddencharacters {
 print "FIXME - haven't coded this bit yet!\n";
 
 
-# [4] Reports any discrepancies by printing messages to `STDOUT`
-print "FIXME - haven't coded this bit yet!\n";
-
-
 exit;
+
+
+# TODO Print warnings to STDERR rather than STDOUT!
+# TODO Make directory selection interactive: e.g. "Enter the path of the directory you would like to check: ".
