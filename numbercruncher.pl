@@ -4,7 +4,7 @@ use File::Find;
 use warnings;
 
 
-my $scriptname = "watermarker.pl";
+my $scriptname = "numbercruncher.pl";
 my $dir = "./vrij"; # FIXME Temporarily set to ./vrij
 
 
