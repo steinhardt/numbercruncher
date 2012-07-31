@@ -5,7 +5,13 @@ use warnings;
 
 
 my $scriptname = "numbercruncher.pl";
-my $dir = "./vrij"; # FIXME Temporarily set to ./vrij
+# my $dir = ".";
+
+
+# Get path to recursively search from user
+print "Directory path: ";
+chomp ( my $dir = <STDIN> );
+$dir =~ s/\/+$//; # Removes any trailing slashes
 
 
 # [1] Checks that the name of a file in directory `{nietvrij,vrij}/12/1234` begins with `1234`
@@ -52,6 +58,5 @@ exit;
 
 
 # TODO Print warnings to STDERR rather than STDOUT!
-# TODO Make directory selection interactive: e.g. "Enter the path of the directory you would like to check: ". Chomp any trailing whitespace or slashes.
 # TODO Skip step 3 if $dir doesn't _end_ in "vrij/" or "vrij".
 # TODO Ignore directories and subdirectories when printing these errors.
