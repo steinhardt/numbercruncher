@@ -9,7 +9,20 @@ my $dir = "./vrij"; # FIXME Temporarily set to ./vrij
 
 
 # [1] Checks that the name of a file in directory `{nietvrij,vrij}/12/1234` begins with `1234`
-print "FIXME - haven't coded this bit yet!\n";
+print "Checking that file names begin with their parent directory's name...\n";
+find(\&check_followsyntax, $dir);
+
+sub check_followsyntax {
+	if ( $File::Find::name =~ /(\d{4})\/(\d{4}).*$/ ) {
+		my $parent = $1;
+		my $filestart = $2;
+		my $new_grandparent = substr ( $2, 0, 2 ); # e.g. parent of 1234/ would be 12/
+	
+		if ( $filestart !~ $parent ) {
+			print "$scriptname - file $File::Find::name not in correct directory; should be in $new_grandparent/$filestart/.\n";
+		}
+	}
+}
 
 
 # [2] Checks that said file name also doesn’t contain spaces or "forbidden characters"
