@@ -31,7 +31,7 @@ if ( $dir =~ /vrij$/ ) {
 
 sub check_psdsinvrij {
 	if ( $_ !~ /.psd$/ ) {
-		print "$scriptname - file $File::Find::name not in Photoshop format. Only Photoshop files (*.psd) allowed in vrij/ directories.\n";
+		print "$scriptname - file $File::Find::name not in Photoshop format. Only Photoshop files (*.psd) allowed in vrij/ directories.\n" if ( -f );
 	}
 }
 
