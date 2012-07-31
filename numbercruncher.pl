@@ -43,8 +43,8 @@ sub check_forbiddencharacters {
 
 
 # [3] Checks that only PSDs are in the `vrij/` directory but anything can be in `nietvrij/`
-print "Checking that only PSDs reside in the vrij/ directory...\n";
-if ( $dir =~ /vrij$/ ) {
+if ( $dir =~ /vrij$/ ) { # FIXME Only works if user *gives* vrij/ as input, not just if it's a subdirectory.
+	print "Checking that only PSDs reside in the vrij/ directory...\n";
 	find(\&check_psdsinvrij, $dir);
 }
 
