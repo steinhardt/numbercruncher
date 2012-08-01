@@ -36,8 +36,8 @@ print "Checking file names for forbidden characters...\n";
 find(\&check_forbiddencharacters, $dir);
 
 sub check_forbiddencharacters {
-	if ( $_ !~ /^[A-Za-z0-9\.\-\+]+$/ ) {
-		print "$scriptname - file $File::Find::name contains forbidden characters. Only A-Z, a-z, 0-9, \. (full stop), - (hyphen) and + (plus sign) allowed.\n";
+	if ( $_ !~ /^[a-z0-9\.\-\+]+$/ ) {
+		print "$scriptname - file $File::Find::name contains forbidden characters. Only lowercase a-z, 0-9, \. (full stop), - (hyphen) and + (plus sign) allowed.\n";
 	}
 }
 
