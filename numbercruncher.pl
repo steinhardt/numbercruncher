@@ -43,9 +43,13 @@ sub check_forbiddencharacters {
 
 
 # [3] Checks that only PSDs are in the `vrij/` directory but anything can be in `nietvrij/`
-if ( $dir =~ /vrij$/ ) { # FIXME Only works if user *gives* vrij/ as input, not just if it's a subdirectory.
-	print "Checking that only PSDs reside in the vrij/ directory...\n";
+print "Checking that only PSDs reside in the vrij/ directory...\n";
+$vrijdir = $dir."/vrij";
+
+if ( -d $vrijdir ) {
 	find(\&check_psdsinvrij, $dir);
+} else {
+	warn "There doesn't appear to be a vrij/ directory within $dir, or this script doesn't have rights to access it.\n"
 }
 
 sub check_psdsinvrij {
@@ -54,8 +58,8 @@ sub check_psdsinvrij {
 	}
 }
 
+
 exit;
 
 
-# TODO Skip step 3 if $dir doesn't _end_ in "vrij/" or "vrij".
-# TODO Ignore directories and subdirectories when printing these errors.
+# TODO Think properly about whether or not to send "errors" (e.g. file X contain forbidden characters) to STDERR.
