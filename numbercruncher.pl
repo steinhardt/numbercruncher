@@ -9,7 +9,7 @@ my $scriptname = "numbercruncher.pl";
 
 
 # Get path to recursively search from user
-print "Directory path: ";
+print "Enter path of directory you want to recursively search: ";
 chomp ( my $dir = <STDIN> );
 $dir =~ s/\/+$//; # Removes any trailing slashes
 
@@ -25,19 +25,19 @@ sub check_followsyntax {
 		my $new_grandparent = substr ( $2, 0, 2 ); # e.g. parent of 1234/ would be 12/
 	
 		if ( $filestart !~ $parent ) {
-			print "$scriptname - file $File::Find::name not in correct directory; should be in $new_grandparent/$filestart/.\n";
+			print STDERR "$scriptname - file $File::Find::name not in correct directory; should be in $new_grandparent/$filestart/.\n";
 		}
 	}
 }
 
 
-# [2] Checks that said file name also doesn’t contain spaces or "forbidden characters"
+# [2] Checks that said file name also doesn't contain spaces or "forbidden characters"
 print "Checking file names for forbidden characters...\n";
 find(\&check_forbiddencharacters, $dir);
 
 sub check_forbiddencharacters {
 	if ( $_ !~ /^[a-z0-9\.\-\+]+$/ ) {
-		print "$scriptname - file $File::Find::name contains forbidden characters. Only lowercase a-z, 0-9, \. (full stop), - (hyphen) and + (plus sign) allowed.\n";
+		print STDERR "$scriptname - file $File::Find::name contains forbidden characters. Only lowercase a-z, 0-9, \. (full stop), - (hyphen) and + (plus sign) allowed.\n";
 	}
 }
 
@@ -50,13 +50,12 @@ if ( $dir =~ /vrij$/ ) { # FIXME Only works if user *gives* vrij/ as input, not 
 
 sub check_psdsinvrij {
 	if ( $_ !~ /.psd$/ ) {
-		print "$scriptname - file $File::Find::name not in Photoshop format. Only Photoshop files (*.psd) allowed in vrij/ directories.\n" if ( -f );
+		print STDERR "$scriptname - file $File::Find::name not in Photoshop format. Only Photoshop files (*.psd) allowed in vrij/ directories.\n" if ( -f );
 	}
 }
 
 exit;
 
 
-# TODO Print warnings to STDERR rather than STDOUT!
 # TODO Skip step 3 if $dir doesn't _end_ in "vrij/" or "vrij".
 # TODO Ignore directories and subdirectories when printing these errors.
